@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Новые элементы</title>
+
+    <script>
+        function addItem() {
+            /*Метод "createElement()" в качестве параметра принимает текстовое
+            значение, обозначающие какой-либо HTML-элемент, и создает в памяти
+            такой элемент.*/            
+            var newItem = document.createElement("div");
+            newItem.innerHTML = "Новый элемент";
+            /*Метод "appendChild()" принимает в качестве параметра HTML-элемент
+            (разной внутренней сложности) и добавляет его во внутренню разметку
+            какого-то другого HTML-элемента на странице.*/
+            document.getElementById("list").appendChild(newItem);
+        };
+    </script>
+</head>
+
+<body>
+    <div id="list" onclick="addItem()">Щелкни, чтобы добавить элемент</div>
+</body>
+
+<footer></footer>
+
+</html>

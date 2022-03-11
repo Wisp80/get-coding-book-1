@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Методы</title>
+</head>
+
+<body>
+    <input type="button" value="Добавить элемент" onclick="addItem();">
+
+    <div id="container"></div>
+
+    <script>
+        function addItem() {
+            /*Свойство "innerHTML" указывает на внутреннюю разметку HTML-элемента. То
+            есть при помощи этого свойства можно встраивать HTML-разметку в другие
+            HTML-элементы.*/
+            document.getElementById("container").innerHTML = "Элемент для запоминания";
+            // document.getElementById("container").innerHTML = `<button style='border: 1px solid blue'>I AM A BUTTON</button>`;
+        };
+    </script>
+</body>
+
+<footer></footer>
+
+</html>
