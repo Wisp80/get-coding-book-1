@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Приложение список задач</title>
+</head>
+
+<body>
+    <p>Организация специальной выставки</p>
+    </br>
+    <input type="text" id="box" value="Введи задачу сюда" />
+    </br>
+    <input type="button" value="Добавить элемент" onclick="addItem()">
+    </br>
+    <div id="list"></div>
+    <script>
+        function addItem() {
+            var newItem = document.createElement("div");
+            newItem.innerHTML = document.getElementById("box").value;
+            document.getElementById("list").appendChild(newItem);
+        };
+    </script>
+</body>
+
+<footer></footer>
+
+</html>

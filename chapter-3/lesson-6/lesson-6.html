@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Удаление элементов</title>
+</head>
+
+<body>
+    <div id="list">
+        Охрана для господина Волкова
+        <div onclick="removeItem(this)">
+            Шерстяные носки
+        </div>
+    </div>
+
+    <script>
+        function removeItem(Item) {
+            document.getElementById("list").removeChild(Item);
+        }
+    </script>
+</body>
+
+<footer></footer>
+
+</html>
