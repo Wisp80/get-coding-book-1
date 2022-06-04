@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Хранение</title>
+
+    <script>
+    function save() {
+            var newItem = document.getElementById("box").value;
+
+            /*Объект "localStorage" встроенный в JS. Это объект,
+            связанный с локальным хранилищем для каждого отдельного браузера.
+            Это хранилище позволяет сохранять простую текстовую информацию,
+            которая не будет исчезать после закрытия вкладки. Если мы обращаемся
+            к несуществующим свойствам объекта, то они автоматически создаются.
+            Благодаря этому можно легко создавать новые ячейки в локальном
+            хранилище.*/
+            localStorage.box = newItem;
+        };       
+
+        function load() {
+            var savedDiv = document.getElementById("savedList");
+            savedDiv.innerHTML = localStorage.box;
+        };
+    </script>
+</head>
+
+<body>
+    <input type="text" id="box" value="Введи задачу сюда"/><br/>
+    <input type="button" id="save" value="Сохранить" onclick="save();"/><br/>
+    <input type="button" id="load" value="Загрузить" onclick="load();"/><br/>
+    Сохраненный элемент: <div id="savedList"></div>
+</body>
+
+<footer></footer>
+
+</html>

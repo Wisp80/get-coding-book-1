@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Приложение список задач</title>
+
+    <script>
+        /*Здесь находится глобальная область видимости, то есть все переменные
+        и фуекции доступны всем остальным функциям.*/
+
+        function addItem() {
+            /*Переменная "newItem" локальная, так как она создается внутри
+            функции, и другие функции в глобальной области видимости не имеют
+            к ней доступа. Когда функция заканчивает свою работу, она подчищает
+            за собой все локальные переменные.*/
+            var newItem = document.createElement("div");
+            newItem.innerHTML = document.getElementById("box").value;
+            newItem.onclick = removeItem;
+            document.getElementById("list").appendChild(newItem);            
+        };
+
+        function removeItem() {
+            document.getElementById("list").removeChild(this);
+        };
+    </script>
+</head>
+
+<body>
+    <p>
+        Организация специальной выставки
+    </p>
+    <br />
+
+    <input type="text" id="box" value="Введи задачу сюда">
+    <br />
+
+    <input type="button" value="Добавить элемент" onclick="addItem();">
+    <br />
+
+    <div id="list"></div>
+</body>
+
+<footer></footer>
+
+</html>
