@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Таймер</title>
+</head>
+
+<body>
+    <div id="number"></div>
+
+    <script>
+        var count = 0;
+
+        /*"setTimeout()" - это встроенная в JS функция, которая принимает два параметра - 
+        какая-то функция и какое-то число - и повторно вызывают переданную функцию через указанное
+        количество милисекунд.
+        
+        Функцию, которую мы передаем куда-то, и хотим, чтобы она была вызвана не сразу, а например,
+        при срабатывании какого-то события или через какое-то указанное время, мы называем
+        callback-функцией или просто callback.*/
+        function updateCount() {
+            count++;
+            document.getElementById("number").innerHTML = count;
+            setTimeout(updateCount, 1000);
+        };
+
+        updateCount();
+    </script>
+</body>
+
+<footer></footer>
+
+</html>
