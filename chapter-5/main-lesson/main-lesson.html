@@ -8,17 +8,42 @@
         #board {
             border: 1px solid black;
             background-color: gray;
-            height: 350px;
-            width: 650px;
+            height: 480px;
+            width: 950px;
+            background: url(./src/GameBackground.jpg);
+            background-size: cover;
         }
 
         .character {
+            background: url('./src/Guest.jpg');
+            background-size: cover;
             background-color: lightblue;
-            width: 120px;
-            height: 120px;
+            width: 190px;
+            height: 190px;
             padding: 10px;
             margin: 10px;
             float: left;
+            display: none;
+        }
+
+        .thief {
+            background: url('./src/Thief.jpg');
+        }
+
+        .difficulty-title {
+            text-align: center;
+            font-size: 70px;
+        }
+
+        .difficulty-buttons {
+            text-align: center;
+            margin: 15px;
+        }
+
+        .difficulty-button {
+            height: 50px;
+            width: 90px;
+            font-size: 20px;
         }
 
         .hidden {
@@ -32,36 +57,102 @@
 </head>
 
 <body>
-    <input type="button" value="Играть" onclick="startGame();">
-    
-    <div id="board">
-        <div class="character">1</div>
-        <div class="character">2</div>
-        <div class="character">3</div>
-        <div class="character">4</div>
-        <div class="character">5</div>
-        <div class="character">6</div>
+    <div class="difficulty-title">
+        Выбери сложность
+    </div>
+
+    <div class="difficulty-buttons">
+        <button class="difficulty-button" onclick="chooseDifficulty(2000, 1000);">Легко</button>
+        <button class="difficulty-button" onclick="chooseDifficulty(1000, 500);">Средне</button>
+        <button class="difficulty-button" onclick="chooseDifficulty(800, 300);">Сложно</button>
+        <button class="difficulty-button" onclick="chooseDifficulty(600, 300);">Боль</button>
+    </div>
+
+    <input type="button" value="Играть" onclick="startGame();" class="hidden" id="Start">
+
+    <div id="board" class="hidden">
+        <div class="character"></div>
+        <div class="character"></div>
+        <div class="character"></div>
+        <div class="character"></div>
+        <div class="character"></div>
+        <div class="character"></div>
     </div>
 
     <script>
         /*Игровой цикл - это функция, которая снова и снова вызывается
         в процессе игры.*/
 
+        var loops = 0;
+        var peopleVisible = false;
+        var gameScore = 0;
+        var hiddenTime;
+        var visibleTime;
+
+        function chooseDifficulty(hTime, vTime) {
+            document.getElementById("board").className = "visible";
+            document.getElementById("Start").className = "visible";
+            document.getElementsByClassName("difficulty-buttons")[0].classList.add("hidden");
+            document.getElementsByClassName("difficulty-title")[0].classList.add("hidden");
+            hiddenTime = hTime;
+            visibleTime = vTime;
+        };
+
         function startGame() {
             gameLoop();
         };
 
-        var loops = 0;
-
         function gameLoop() {
+            peopleVisible = !peopleVisible;
+
+            createCharacters();
+
             loops++;
 
             if (loops < 12) {
-                setTimeout(gameLoop, 3000);
+                setTimeout(gameLoop, peopleVisible ? hiddenTime : visibleTime);
             } else {
-                alert("Игра окончена!");
+                alert("Твой счет " + gameScore);
+                document.getElementById("board").className = "hidden";
+                document.getElementById("Start").className = "hidden";
+                document.getElementsByClassName("difficulty-buttons")[0].classList.remove("hidden");
+                document.getElementsByClassName("difficulty-title")[0].classList.remove("hidden");
+                gameScore = 0;
+                loops = 0;
             };
-        };        
+        };
+
+        function createCharacters() {
+            var board = document.getElementById("board");
+
+            /*
+            Условный (тернарный) оператор - единственный оператор в JavaScript, принимающий троих участников: 
+            1) условие, за которым следует знак вопроса "?"
+            2) выражение, которое выполняется, если условие истинно, сопровождается двоеточием ":"
+            3) выражение, которое выполняется, если условие ложно. 
+            
+            Он часто используется в качестве укороченного варианта условного оператора "if".
+            */
+            var classToSet = peopleVisible ? "character visible" : "character hidden";
+
+            for (var index = 0; index < 6; index++) {
+                board.children[index].className = classToSet;
+                board.children[index].onclick = function () {
+                    gameScore += -2;
+                };
+            };
+
+            /*Метод "Math.random()" возвращает псевдослучайное число с плавающей запятой из диапазона [0, 1), то есть, 
+            от 0 (включительно) до 1 (но не включая 1).
+            Метод "Math.floor()" - округление вниз. Округляет аргумент до ближайшего меньшего целого.*/
+            var randomNumber = Math.floor(Math.random() * 6) + 1;
+
+            board.children[randomNumber - 1].onclick = function () {
+                gameScore++;
+            };
+
+            board.children[randomNumber - 1].className = classToSet + " thief";
+        };
     </script>
 </body>
 
