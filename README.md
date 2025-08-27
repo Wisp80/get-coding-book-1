@@ -1,4 +1,4 @@
-<h1 align="center">Completed lessons from "Get Coding" book</h1>
+<h1 align="center">Completed lessons from the book "Get Coding"</h1>
 
 **`CHAPTER 01`:**
 * Lesson 01 HTML-elements "html", "head", "body", "title", "p"
